@@ -1,0 +1,122 @@
+﻿@using System_Management.Models
+
+@{
+    Layout = "~/Views/Shared/_defaultLayout.cshtml";
+}
+@{
+    List<School> schools = ViewBag.School;
+    string lastLogin = ViewBag.Account;
+    string message = ViewBag.Message;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+
+    <script type="text/javascript">
+        var show = false;
+        function showModal(id) {
+            if (id == 1) {
+                var modal = document.getElementById("modalCustomer");
+            } else {
+                var modal = document.getElementById("modalCustomer2");
+            }
+            if (show === true) {
+                modal.style.visibility = "hidden";
+                modal.style.opacity = "0";
+                show = false;
+            } else {
+                modal.style.visibility = "visible";
+                modal.style.opacity = "1";
+                show = true;
+            }
+
+
+        }
+    </script>
+
+
+    <div class="container">
+        <div class="row" style="text-align:center">
+            <div class="col-sm-12">
+                <span style="color:red; font-size:25px; font-weight:600; text-align:center">@message</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-bottom: 30px">
+        <div class="row">
+            @using (Html.BeginForm("ParentsLogIn", "Defaults", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form__login--container form__login--left">
+                    <div class="row form__border_topbot">
+                        <button>Phụ Huynh</button>
+                    </div>
+                    <div class="row text-center " style="height: 50px; position: relative;">
+                        <button type="button" style="position: absolute; margin:0;left:43%;top:50%;transform: translateY(-50%)" onclick="showModal(2)">Đăng nhập</button>
+                    </div>
+                </div>
+                <div id="modalCustomer2" style="position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); opacity: 0;visibility:hidden">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 1rem 1.5rem; width: 30rem;height:20rem; border-radius: 0.5rem;">
+                        <ul style="list-style-type: none; padding: 0;">
+                            <li style="text-align:right"><button type="button" onclick="showModal()">×</button></li>
+                            <li style="margin: 10px auto;">UserName <input type="text" name="username" value="@lastLogin" /></li>
+                            <li style="margin: 10px auto;">Password <input type="text" name="password" value="" /></li>
+                            <li style="margin: 10px auto;">Password ><input type="submit" name="submit" value="Đăng Nhập" /></li>
+                        </ul>
+                    </div>
+                </div>
+
+            }
+
+            @using (Html.BeginForm("UserLogIn", "Defaults", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form__login--container form__login--right">
+                    <div class="row form__border_topbot">
+                        <button>Sinh viên, Giảng viên, Cán bộ ĐH-FPT</button>
+                    </div>
+                    <div class="row" style="height: 50px; position: relative">
+                        <div class="col-sm-4 ">
+                            <select name="selectedCampus" style="position: absolute; margin:0;transform: translateY(70%)">
+                                <option value="-1">Select Campus</option>
+
+
+                                @foreach (var item in schools)
+                                {
+                                    <option value="@item.SchoolId">@Html.DisplayFor(modelItem => item.SchoolName)</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-3" style="position:relative">
+
+                            <button type="button" class="btn btn-primary form__button--login" onclick="showModal(1)">Sign in</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="modalCustomer" style="position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); opacity: 0;visibility:hidden">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 1rem 1.5rem; width: 30rem;height:20rem; border-radius: 0.5rem;">
+                        <ul style="list-style-type: none; padding: 0;">
+                            <li style="text-align:right"><button type="button" onclick="showModal(1)">×</button></li>
+                            <li style="margin: 10px auto;text-align:center">UserName <input type="text" name="username" value="@lastLogin" /></li>
+                            <li style="margin: 10px auto;text-align:center">Password <input type="password" name="password" value="" /></li>
+                            <li style="margin: 10px auto; text-align:center"><input type="submit" name="submit" value="Sign in" /></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

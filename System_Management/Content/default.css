@@ -1,0 +1,37 @@
+﻿body{
+    padding-top: 0;
+}
+img{
+    width: 100%;
+}
+.form__login--container {
+    border: 1px solid black;
+    width: 48%;
+}
+.form__login--left{
+    float: left;
+}
+
+.form__login--right{
+    float: right;
+}
+
+.row{
+    margin: 0;
+}
+.form__border_topbot{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.container{
+    padding: 0;
+}
+.form__button--login {
+    position: absolute;
+    margin: 0;
+    left:-15px;
+    transform: translateY(55%);
+}
+.btn{
+    padding: 0 5px;
+}

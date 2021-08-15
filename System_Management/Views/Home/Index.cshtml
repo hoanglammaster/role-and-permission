@@ -1,0 +1,206 @@
+﻿@using System_Management.Models
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_homeLayout.cshtml";
+    List<News>
+    listNews = ViewBag.News;
+}
+
+@Styles.Render("~/Content/home.css")
+
+<div class="container">
+    <div class="content__left content__container">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            <h3 class="content__title content__title--left content__width--haft">
+                News
+            </h3>
+
+            <div class="container-fluid content__left--search">
+                <div class="row">
+                    <input type="text" name="searchNews" value="" /> <input style="font-weight:600" type="submit" value="Search" />
+                </div>
+                <div class="row height__full">
+                    <ul>
+                        @{
+                            if (listNews == null || listNews.Count == 0)
+                            {
+                                <li>No data</li>
+                            }
+                        }
+                        @foreach (var news in listNews)
+                        {
+                            <li> @Html.ActionLink(news.NewsTitle, "Detail", "News", new { newId = news.NewsId })</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+        <div class="container-fluid" style=" padding: 0;">
+            <img class="content__width--full" src="~/Images/important_notice.jpg" />
+        </div>
+    </div>
+
+
+
+    <div class="content__right content__container">
+        <h3 class="content__title content__width--haft" style="background-color:darkorange">
+            Academic Information
+        </h3>
+        <div class="container" style="width:100%">
+            <div class="row information__container">
+                <div class="col-sm-7">
+                    @*Registration/Application(Thủ tục/đơn từ)*@
+                    <h4>
+                        Registration/Application(Thủ tục/đơn từ)
+                    </h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul>
+                                <li>@Html.ActionLink("Suspend one semester to take repeated course ", "SubjectFee", "Information")|@Html.ActionLink("Cancel", "SubjectFee", "Information") (Xin tạm hoãn tiến độ một học kỳ để học lại | Hủy bỏ việc xin tạm hoãn)</li>
+                                <li>@Html.ActionLink("Suspend one semester ", "SubjectFee", "Information")|@Html.ActionLink("Cancel", "SubjectFee", "Information") (Xin tạm nghỉ một học kỳ | Hủy bỏ việc xin tạm nghỉ)</li>
+                                <li>@Html.ActionLink("Move out class, suspend subject ", "SubjectFee", "Information")|@Html.ActionLink("Cancel", "SubjectFee", "Information") (Xin chuyển lớp, tạm ngừng môn học, ...)</li>
+                                <li>@Html.ActionLink("Register extra courses", "SubjectFee", "Information") (Đăng ký môn học đi chậm kỳ)</li>
+                                <li>@Html.ActionLink("Register to improve mark ", "SubjectFee", "Information") (Đăng ký học cải thiện điểm)</li>
+                                <li>@Html.ActionLink("Register to repeat a course", "SubjectFee", "Information") (Đăng ký học lại)</li>
+                                <li>@Html.ActionLink("Cancel registration", "SubjectFee", "Information") (Hủy đăng ký học)</li>
+                                <li>@Html.ActionLink("Register Free Elective Courses", "SubjectFee", "Information") (Đăng ký môn tự chọn)</li>
+                                <li>@Html.ActionLink("Send Application", "Normal", "Application") (Gửi đơn) | @Html.ActionLink("View Application ", "SubjectFee", "Information") (Xem đơn)</li>
+                                <li>@Html.ActionLink("Xin xác nhận sinh viên", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("Choose paid items", "SubjectFee", "Information") (Lựa chọn các khoản nộp)| @Html.ActionLink("View", "SubjectFee", "Information")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    @*Information Access(Tra cứu thông tin)*@
+                    <h4>
+                        Information Access(Tra cứu thông tin)
+                    </h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul>
+                                <li>@Html.ActionLink("University timetable", "SubjectFee", "Information") (Lịch học)</li>
+                                <li>@Html.ActionLink("Tuition fee per course", "SubjectFee", "Information") (Biểu học phí)</li>
+                                <li>@Html.ActionLink("Weekly timetable", "SubjectFee", "Information") (Thời khóa biểu từng tuần)</li>
+                                <li>@Html.ActionLink("Blended Online Course (BLOC) Schedules", "SubjectFee", "Information") (Lịch học các môn theo phương pháp BLOC trong kỳ)</li>
+                                <li>@Html.ActionLink("Class timetable", "SubjectFee", "Information") (Xem thời khóa biểu của một lớp)</li>
+                                <li>@Html.ActionLink("View exam schedule", "SubjectFee", "Information") (Xem lịch thi)<img style="width:auto" src="~/Images/new_icon.gif" /> </li>
+                                <li>@Html.ActionLink("View Syllabuses", "SubjectFee", "Information") (Xem đề cương môn học)</li>
+                                <li>@Html.ActionLink("EduNext student guideline", "SubjectFee", "Information") <img style="width:auto" src="~/Images/new_icon.gif" /></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row information__container">
+                <div class="col-sm-7">
+                    @*Feedback(Ý kiến)*@
+                    <h4>
+                        Feedback(Ý kiến)
+                    </h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul>
+                                <li>@Html.ActionLink("Feedback about teaching", "SubjectFee", "Information") (Ý kiến về việc giảng dạy)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    @*Reports(Báo cáo)*@
+                    <h4>
+                        Reports(Báo cáo)
+                    </h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul>
+                                <li>@Html.ActionLink("Attendance report", "SubjectFee", "Information") (Báo cáo điểm danh)</li>
+                                <li>@Html.ActionLink("Mark Report", "SubjectFee", "Information") (Báo cáo điểm)</li>
+                                <li>@Html.ActionLink("Academic Transcript", "SubjectFee", "Information") (Báo cáo điểm)</li>
+                                <li>@Html.ActionLink("Curriculum", "SubjectFee", "Information") (Khung chương trình)</li>
+                                <li>@Html.ActionLink("Student Fee", "SubjectFee", "Information")  (Tra cứu học phí đã nộp theo kỳ)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row information__container">
+                <div class="col-sm-7">
+                    @*Others(Khác)*@
+                    <h4>
+                        Others(Khác)
+                    </h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul>
+                                <li>@Html.ActionLink("Student Profile", "SubjectFee", "Information") | @Html.ActionLink("Update Profile", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("View semester", "SubjectFee", "Information") ,@Html.ActionLink("room", "SubjectFee", "Information") ( Xem thông tin về học kỳ, phòng)</li>
+                                <li>@Html.ActionLink("Công nhận và chuyển đổi tín chỉ các học phần của Đại học trực tuyến (FUNiX)", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("Danh sách các môn học lại chờ xếp lớp", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("Các loại chứng chỉ", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("Report điểm phong trào", "SubjectFee", "Information")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    @*Regulations(Các quy định)*@
+                    <h4>
+                        Regulations(Các quy định)
+                    </h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul>
+                                <li>@Html.ActionLink("Regulations...", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("Dormitory regulations", "SubjectFee", "Information") (Nội quy KTX)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row information__container">
+                <div class="col-sm-7">
+                    @*Courses on FPTU-Coursera*@
+                    <h4>
+                        Courses on FPTU-Coursera
+                    </h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul>
+                                <li>@Html.ActionLink("Announcement", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("Ask mentor", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("View answer", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("Submit certificates", "SubjectFee", "Information")</li>
+                                <li>@Html.ActionLink("Certificate submission guideline", "SubjectFee", "Information")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    @*Thông tin KTX =>Hòa Lạc - On Campus Dormitory*@
+                    <h4>
+                        Thông tin KTX =>Hòa Lạc - On Campus Dormitory
+                    </h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul>
+                                <li>@Html.ActionLink("Tuition fee per course (Biểu học phí)", "SubjectFee", "Information")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            @Html.Partial("_Footer")
+        </footer>
+
+
+    </div>
+</div>

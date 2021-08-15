@@ -1,0 +1,68 @@
+﻿@using System_Management.Models
+@using System.Globalization
+@{
+    ViewBag.Title = "SubjectFee";
+    Layout = "~/Views/Shared/_contentLayout.cshtml";
+    List<Subject> listSubjects = ViewBag.Subjects;
+}
+@Styles.Render("~/Content/subject-f")
+
+<div class="container">
+    <h2>Tunion fee per course</h2>
+
+    <div class="row" style="background-color: dodgerblue">
+        <div class="col-sm-2" style="border-right: 1px solid white;">
+            SUBJECTCODE
+        </div>
+        <div class="col-sm-5" style="border-right: 1px solid white;">
+            SUBJECTNAME
+        </div>
+        <div class="col-sm-2" style="border-right: 1px solid white;">
+            NUMBER CREDITS
+        </div>
+        <div class="col-sm-1" style="border-right: 1px solid white;">
+            FEE
+        </div>
+        <div class="col-sm-2" style="border-right: 1px solid white;">
+            FEE INTERNATIONAL
+        </div>
+    </div>
+    @foreach (var item in listSubjects)
+    {
+        <div class="row row__padding--none" style="border-bottom: 1px solid rgb(128 128 128);">
+            <div class="col-sm-2">
+                @item.SubjectCode
+            </div>
+            <div class="col-sm-5">
+                @item.SubjectName
+            </div>
+            <div class="col-sm-2">
+                @item.NumberCredits
+            </div>
+            <div class="col-sm-1">
+                @{
+                    if (item.Fee.HasValue)
+                    {
+                        @Convert.ToInt32(item.Fee).ToString("N0", CultureInfo.CreateSpecificCulture("en-US")); 
+                    }
+                    else
+                    {
+                        @item.Fee
+                    }
+                }
+            </div>
+            <div class="col-sm-2">
+                @{
+                    if (item.FeeInternational.HasValue)
+                    {
+                        @Convert.ToInt32(item.FeeInternational).ToString("N0",CultureInfo.CreateSpecificCulture("en-US"));
+                    }
+                    else
+                    {
+                        @item.FeeInternational
+                    }
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,1173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FPT_EducationSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Admins_Users" FromRole="Admins" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="ApplicationDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Student" Type="Int32" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileAttached" Type="Int32" />
+    <Property Name="Solution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Application" Relationship="Self.FK_ApplicationDetails_Applications" FromRole="ApplicationDetails" ToRole="Applications" />
+    <NavigationProperty Name="File" Relationship="Self.FK_ApplicationDetails_Files" FromRole="ApplicationDetails" ToRole="Files" />
+    <NavigationProperty Name="Student1" Relationship="Self.FK_ApplicationDetails_Students" FromRole="ApplicationDetails" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="AppId" />
+    </Key>
+    <Property Name="AppId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Department" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateClose" Type="DateTime" Precision="0" />
+    <Property Name="AppStatus" Type="Boolean" />
+    <Property Name="Solved" Type="Int32" />
+    <NavigationProperty Name="ApplicationDetail" Relationship="Self.FK_ApplicationDetails_Applications" FromRole="Applications" ToRole="ApplicationDetails" />
+    <NavigationProperty Name="Department1" Relationship="Self.FK_Applications_Departments" FromRole="Applications" ToRole="Departments" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK_Applications_Teachers" FromRole="Applications" ToRole="Teachers" />
+  </EntityType>
+  <EntityType Name="Class_Students">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <Property Name="Semester_Students" Type="Int32" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Class" Relationship="Self.FK_ClassStudents_Classes" FromRole="Class_Students" ToRole="Classes" />
+    <NavigationProperty Name="Semester_Students1" Relationship="Self.FK_ClassStudents_SemesterStudents" FromRole="Class_Students" ToRole="Semester_Students" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK_ClassStudents_Subjects" FromRole="Class_Students" ToRole="Subjects" />
+    <NavigationProperty Name="Grades" Relationship="Self.FK_Grades_ClassStudent" FromRole="Class_Students" ToRole="Grades" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ClassId" />
+    </Key>
+    <Property Name="ClassId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Class_Students" Relationship="Self.FK_ClassStudents_Classes" FromRole="Classes" ToRole="Class_Students" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Parents" Relationship="Self.FK_FParents_Contacts" FromRole="Contacts" ToRole="Parents" />
+    <NavigationProperty Name="Parents1" Relationship="Self.FK_MParents_Contacts" FromRole="Contacts" ToRole="Parents" />
+    <NavigationProperty Name="Schools" Relationship="Self.FK_Schools_Contacts" FromRole="Contacts" ToRole="Schools" />
+    <NavigationProperty Name="UserInformations" Relationship="Self.FK_UserInformations_Contact" FromRole="Contacts" ToRole="UserInformations" />
+  </EntityType>
+  <EntityType Name="Curiculum">
+    <Key>
+      <PropertyRef Name="CuriculumId" />
+    </Key>
+    <Property Name="CuriculumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MajorId" Type="Int32" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Major" Relationship="Self.FK_Curiculums_Majors" FromRole="Curiculums" ToRole="Majors" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK_Curiculums_Subjects" FromRole="Curiculums" ToRole="Subjects" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="School" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Departments" FromRole="Departments" ToRole="Applications" />
+    <NavigationProperty Name="School1" Relationship="Self.FK_Departments_Schools" FromRole="Departments" ToRole="Schools" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK_Staffs_Departments" FromRole="Departments" ToRole="Staffs" />
+    <NavigationProperty Name="Teachers" Relationship="Self.FK_Teachers_Departments" FromRole="Departments" ToRole="Teachers" />
+  </EntityType>
+  <EntityType Name="File">
+    <Key>
+      <PropertyRef Name="FileId" />
+    </Key>
+    <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FilesName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ByteArrays" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="ApplicationDetails" Relationship="Self.FK_ApplicationDetails_Files" FromRole="Files" ToRole="ApplicationDetails" />
+    <NavigationProperty Name="News" Relationship="Self.FK_News_Files" FromRole="Files" ToRole="News" />
+  </EntityType>
+  <EntityType Name="GradeCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Percents" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK_GradeCategorys_Subjects" FromRole="GradeCategorys" ToRole="Subjects" />
+    <NavigationProperty Name="GradeItems" Relationship="Self.FK_GradeItems_GradeCategorys" FromRole="GradeCategorys" ToRole="GradeItems" />
+  </EntityType>
+  <EntityType Name="GradeItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="ItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Persents" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
+    <NavigationProperty Name="GradeCategory" Relationship="Self.FK_GradeItems_GradeCategorys" FromRole="GradeItems" ToRole="GradeCategorys" />
+    <NavigationProperty Name="Grades" Relationship="Self.FK_Grades_GradeItems" FromRole="GradeItems" ToRole="Grades" />
+  </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="GradeId" />
+    </Key>
+    <Property Name="GradeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GradeItems" Type="Int32" Nullable="false" />
+    <Property Name="Class_Student" Type="Int32" Nullable="false" />
+    <Property Name="Score" Type="Decimal" Precision="4" Scale="2" />
+    <NavigationProperty Name="Class_Students" Relationship="Self.FK_Grades_ClassStudent" FromRole="Grades" ToRole="Class_Students" />
+    <NavigationProperty Name="GradeItem" Relationship="Self.FK_Grades_GradeItems" FromRole="Grades" ToRole="GradeItems" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="ImageId" />
+    </Key>
+    <Property Name="ImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImageName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="UserInformations" Relationship="Self.FK_UserInformations_Images" FromRole="Images" ToRole="UserInformations" />
+  </EntityType>
+  <EntityType Name="Major">
+    <Key>
+      <PropertyRef Name="MajorId" />
+    </Key>
+    <Property Name="MajorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MajorName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MajorCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="School" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Curiculums" Relationship="Self.FK_Curiculums_Majors" FromRole="Majors" ToRole="Curiculums" />
+    <NavigationProperty Name="School1" Relationship="Self.FK_Majors_Schools" FromRole="Majors" ToRole="Schools" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Students_Majors" FromRole="Majors" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsId" />
+    </Key>
+    <Property Name="NewsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NewsTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NewsContent" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Poster" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="FileAttached" Type="Int32" />
+    <Property Name="School" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="File" Relationship="Self.FK_News_Files" FromRole="News" ToRole="Files" />
+    <NavigationProperty Name="School1" Relationship="Self.FK_News_Schools" FromRole="News" ToRole="Schools" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_News_Staffs" FromRole="News" ToRole="Staffs" />
+  </EntityType>
+  <EntityType Name="Parent">
+    <Key>
+      <PropertyRef Name="ParentId" />
+    </Key>
+    <Property Name="ParentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FatherName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FatherContact" Type="Int32" />
+    <Property Name="MotherName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MotherContact" Type="Int32" />
+    <NavigationProperty Name="Contact" Relationship="Self.FK_FParents_Contacts" FromRole="Parents" ToRole="Contacts" />
+    <NavigationProperty Name="Contact1" Relationship="Self.FK_MParents_Contacts" FromRole="Parents" ToRole="Contacts" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Students_Parents" FromRole="Parents" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="PermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PermissionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PermissionDetail" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Role_Permission" Relationship="Self.FK_RP_Permission" FromRole="Permission" ToRole="Role_Permission" />
+  </EntityType>
+  <EntityType Name="Role_Permission">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="PermissionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Permission" Relationship="Self.FK_RP_Permission" FromRole="Role_Permission" ToRole="Permission" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_RP_Roles" FromRole="Role_Permission" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Role_Permission" Relationship="Self.FK_RP_Roles" FromRole="Roles" ToRole="Role_Permission" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_Role" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="School">
+    <Key>
+      <PropertyRef Name="SchoolId" />
+    </Key>
+    <Property Name="SchoolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SchoolName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SchoolContact" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Contact" Relationship="Self.FK_Schools_Contacts" FromRole="Schools" ToRole="Contacts" />
+    <NavigationProperty Name="Departments" Relationship="Self.FK_Departments_Schools" FromRole="Schools" ToRole="Departments" />
+    <NavigationProperty Name="Majors" Relationship="Self.FK_Majors_Schools" FromRole="Schools" ToRole="Majors" />
+    <NavigationProperty Name="News" Relationship="Self.FK_News_Schools" FromRole="Schools" ToRole="News" />
+  </EntityType>
+  <EntityType Name="Semester_Students">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Semester" Type="Int32" Nullable="false" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Class_Students" Relationship="Self.FK_ClassStudents_SemesterStudents" FromRole="Semester_Students" ToRole="Class_Students" />
+    <NavigationProperty Name="Semester1" Relationship="Self.FK_SemesterStudents_Semester" FromRole="Semester_Students" ToRole="Semesters" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_SemesterStudents_Students" FromRole="Semester_Students" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Semester">
+    <Key>
+      <PropertyRef Name="SemesterId" />
+    </Key>
+    <Property Name="SemesterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SemesterName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Semester_Students" Relationship="Self.FK_SemesterStudents_Semester" FromRole="Semesters" ToRole="Semester_Students" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="StaffId" />
+    </Key>
+    <Property Name="StaffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Department" Type="Int32" />
+    <NavigationProperty Name="Department1" Relationship="Self.FK_Staffs_Departments" FromRole="Staffs" ToRole="Departments" />
+    <NavigationProperty Name="News" Relationship="Self.FK_News_Staffs" FromRole="Staffs" ToRole="News" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Staffs_Users" FromRole="Staffs" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Major" Type="Int32" Nullable="false" />
+    <Property Name="EnrollmentDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Parent" Type="Int32" />
+    <NavigationProperty Name="ApplicationDetails" Relationship="Self.FK_ApplicationDetails_Students" FromRole="Students" ToRole="ApplicationDetails" />
+    <NavigationProperty Name="Major1" Relationship="Self.FK_Students_Majors" FromRole="Students" ToRole="Majors" />
+    <NavigationProperty Name="Parent1" Relationship="Self.FK_Students_Parents" FromRole="Students" ToRole="Parents" />
+    <NavigationProperty Name="Semester_Students" Relationship="Self.FK_SemesterStudents_Students" FromRole="Students" ToRole="Semester_Students" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Students_Users" FromRole="Students" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="SubjectId" />
+    </Key>
+    <Property Name="SubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SubjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumberCredits" Type="Int32" Nullable="false" />
+    <Property Name="Fee" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="FeeInternational" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Class_Students" Relationship="Self.FK_ClassStudents_Subjects" FromRole="Subjects" ToRole="Class_Students" />
+    <NavigationProperty Name="Curiculums" Relationship="Self.FK_Curiculums_Subjects" FromRole="Subjects" ToRole="Curiculums" />
+    <NavigationProperty Name="GradeCategorys" Relationship="Self.FK_GradeCategorys_Subjects" FromRole="Subjects" ToRole="GradeCategorys" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Department" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Teachers" FromRole="Teachers" ToRole="Applications" />
+    <NavigationProperty Name="Department1" Relationship="Self.FK_Teachers_Departments" FromRole="Teachers" ToRole="Departments" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Teachers_Users" FromRole="Teachers" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UserInformation">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MidleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="Boolean" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="Avatar" Type="Int32" />
+    <Property Name="Contact" Type="Int32" />
+    <NavigationProperty Name="Contact1" Relationship="Self.FK_UserInformations_Contact" FromRole="UserInformations" ToRole="Contacts" />
+    <NavigationProperty Name="Image" Relationship="Self.FK_UserInformations_Images" FromRole="UserInformations" ToRole="Images" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserInformations_Users" FromRole="UserInformations" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Admins" Relationship="Self.FK_Admins_Users" FromRole="Users" ToRole="Admins" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK_Staffs_Users" FromRole="Users" ToRole="Staffs" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Students_Users" FromRole="Users" ToRole="Students" />
+    <NavigationProperty Name="Teachers" Relationship="Self.FK_Teachers_Users" FromRole="Users" ToRole="Teachers" />
+    <NavigationProperty Name="UserInformation" Relationship="Self.FK_UserInformations_Users" FromRole="Users" ToRole="UserInformations" />
+  </EntityType>
+  <Association Name="FK_Admins_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Admins" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Admins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationDetails_Applications">
+    <End Role="Applications" Type="Self.Application" Multiplicity="1" />
+    <End Role="ApplicationDetails" Type="Self.ApplicationDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Applications">
+        <PropertyRef Name="AppId" />
+      </Principal>
+      <Dependent Role="ApplicationDetails">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationDetails_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="0..1" />
+    <End Role="ApplicationDetails" Type="Self.ApplicationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileId" />
+      </Principal>
+      <Dependent Role="ApplicationDetails">
+        <PropertyRef Name="FileAttached" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationDetails_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="ApplicationDetails" Type="Self.ApplicationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="ApplicationDetails">
+        <PropertyRef Name="Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Applications_Departments">
+    <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+    <End Role="Applications" Type="Self.Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Applications">
+        <PropertyRef Name="Department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Applications_Teachers">
+    <End Role="Teachers" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Applications" Type="Self.Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="TeacherId" />
+      </Principal>
+      <Dependent Role="Applications">
+        <PropertyRef Name="Solved" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassStudents_Classes">
+    <End Role="Classes" Type="Self.Class" Multiplicity="1" />
+    <End Role="Class_Students" Type="Self.Class_Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="ClassId" />
+      </Principal>
+      <Dependent Role="Class_Students">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassStudents_SemesterStudents">
+    <End Role="Semester_Students" Type="Self.Semester_Students" Multiplicity="1" />
+    <End Role="Class_Students" Type="Self.Class_Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester_Students">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Class_Students">
+        <PropertyRef Name="Semester_Students" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassStudents_Subjects">
+    <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Class_Students" Type="Self.Class_Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="SubjectId" />
+      </Principal>
+      <Dependent Role="Class_Students">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grades_ClassStudent">
+    <End Role="Class_Students" Type="Self.Class_Students" Multiplicity="1" />
+    <End Role="Grades" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class_Students">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Grades">
+        <PropertyRef Name="Class_Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FParents_Contacts">
+    <End Role="Contacts" Type="Self.Contact" Multiplicity="0..1" />
+    <End Role="Parents" Type="Self.Parent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contacts">
+        <PropertyRef Name="ContactId" />
+      </Principal>
+      <Dependent Role="Parents">
+        <PropertyRef Name="FatherContact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MParents_Contacts">
+    <End Role="Contacts" Type="Self.Contact" Multiplicity="0..1" />
+    <End Role="Parents" Type="Self.Parent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contacts">
+        <PropertyRef Name="ContactId" />
+      </Principal>
+      <Dependent Role="Parents">
+        <PropertyRef Name="MotherContact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Schools_Contacts">
+    <End Role="Contacts" Type="Self.Contact" Multiplicity="1" />
+    <End Role="Schools" Type="Self.School" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contacts">
+        <PropertyRef Name="ContactId" />
+      </Principal>
+      <Dependent Role="Schools">
+        <PropertyRef Name="SchoolContact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInformations_Contact">
+    <End Role="Contacts" Type="Self.Contact" Multiplicity="0..1" />
+    <End Role="UserInformations" Type="Self.UserInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contacts">
+        <PropertyRef Name="ContactId" />
+      </Principal>
+      <Dependent Role="UserInformations">
+        <PropertyRef Name="Contact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Curiculums_Majors">
+    <End Role="Majors" Type="Self.Major" Multiplicity="1" />
+    <End Role="Curiculums" Type="Self.Curiculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Majors">
+        <PropertyRef Name="MajorId" />
+      </Principal>
+      <Dependent Role="Curiculums">
+        <PropertyRef Name="MajorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Curiculums_Subjects">
+    <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Curiculums" Type="Self.Curiculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="SubjectId" />
+      </Principal>
+      <Dependent Role="Curiculums">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Departments_Schools">
+    <End Role="Schools" Type="Self.School" Multiplicity="1" />
+    <End Role="Departments" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schools">
+        <PropertyRef Name="SchoolId" />
+      </Principal>
+      <Dependent Role="Departments">
+        <PropertyRef Name="School" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staffs_Departments">
+    <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Staffs" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Staffs">
+        <PropertyRef Name="Department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teachers_Departments">
+    <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+    <End Role="Teachers" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Teachers">
+        <PropertyRef Name="Department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="0..1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileId" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="FileAttached" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GradeCategorys_Subjects">
+    <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
+    <End Role="GradeCategorys" Type="Self.GradeCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="SubjectId" />
+      </Principal>
+      <Dependent Role="GradeCategorys">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GradeItems_GradeCategorys">
+    <End Role="GradeCategorys" Type="Self.GradeCategory" Multiplicity="1" />
+    <End Role="GradeItems" Type="Self.GradeItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GradeCategorys">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GradeItems">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grades_GradeItems">
+    <End Role="GradeItems" Type="Self.GradeItem" Multiplicity="1" />
+    <End Role="Grades" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GradeItems">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Grades">
+        <PropertyRef Name="GradeItems" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInformations_Images">
+    <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
+    <End Role="UserInformations" Type="Self.UserInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="ImageId" />
+      </Principal>
+      <Dependent Role="UserInformations">
+        <PropertyRef Name="Avatar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Majors_Schools">
+    <End Role="Schools" Type="Self.School" Multiplicity="1" />
+    <End Role="Majors" Type="Self.Major" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schools">
+        <PropertyRef Name="SchoolId" />
+      </Principal>
+      <Dependent Role="Majors">
+        <PropertyRef Name="School" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Majors">
+    <End Role="Majors" Type="Self.Major" Multiplicity="1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Majors">
+        <PropertyRef Name="MajorId" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Major" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_Schools">
+    <End Role="Schools" Type="Self.School" Multiplicity="1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schools">
+        <PropertyRef Name="SchoolId" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="School" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_Staffs">
+    <End Role="Staffs" Type="Self.Staff" Multiplicity="1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staffs">
+        <PropertyRef Name="StaffId" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="Poster" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Parents">
+    <End Role="Parents" Type="Self.Parent" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parents">
+        <PropertyRef Name="ParentId" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RP_Permission">
+    <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+    <End Role="Role_Permission" Type="Self.Role_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="PermissionId" />
+      </Principal>
+      <Dependent Role="Role_Permission">
+        <PropertyRef Name="PermissionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RP_Roles">
+    <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+    <End Role="Role_Permission" Type="Self.Role_Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Role_Permission">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Role">
+    <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterStudents_Semester">
+    <End Role="Semesters" Type="Self.Semester" Multiplicity="1" />
+    <End Role="Semester_Students" Type="Self.Semester_Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semesters">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="Semester_Students">
+        <PropertyRef Name="Semester" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterStudents_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="Semester_Students" Type="Self.Semester_Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="Semester_Students">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staffs_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Staffs" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Staffs">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teachers_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Teachers" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Teachers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInformations_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="UserInformations" Type="Self.UserInformation" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserInformations">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FPT_EducationSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="ApplicationDetails" EntityType="Self.ApplicationDetail" />
+    <EntitySet Name="Applications" EntityType="Self.Application" />
+    <EntitySet Name="Class_Students" EntityType="Self.Class_Students" />
+    <EntitySet Name="Classes" EntityType="Self.Class" />
+    <EntitySet Name="Contacts" EntityType="Self.Contact" />
+    <EntitySet Name="Curiculums" EntityType="Self.Curiculum" />
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Files" EntityType="Self.File" />
+    <EntitySet Name="GradeCategorys" EntityType="Self.GradeCategory" />
+    <EntitySet Name="GradeItems" EntityType="Self.GradeItem" />
+    <EntitySet Name="Grades" EntityType="Self.Grade" />
+    <EntitySet Name="Images" EntityType="Self.Image" />
+    <EntitySet Name="Majors" EntityType="Self.Major" />
+    <EntitySet Name="News" EntityType="Self.News" />
+    <EntitySet Name="Parents" EntityType="Self.Parent" />
+    <EntitySet Name="Permissions" EntityType="Self.Permission" />
+    <EntitySet Name="Role_Permission" EntityType="Self.Role_Permission" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Schools" EntityType="Self.School" />
+    <EntitySet Name="Semester_Students" EntityType="Self.Semester_Students" />
+    <EntitySet Name="Semesters" EntityType="Self.Semester" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="Subjects" EntityType="Self.Subject" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <EntitySet Name="UserInformations" EntityType="Self.UserInformation" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Admins_Users" Association="Self.FK_Admins_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Admins" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationDetails_Applications" Association="Self.FK_ApplicationDetails_Applications">
+      <End Role="Applications" EntitySet="Applications" />
+      <End Role="ApplicationDetails" EntitySet="ApplicationDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationDetails_Files" Association="Self.FK_ApplicationDetails_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="ApplicationDetails" EntitySet="ApplicationDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationDetails_Students" Association="Self.FK_ApplicationDetails_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="ApplicationDetails" EntitySet="ApplicationDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Applications_Departments" Association="Self.FK_Applications_Departments">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Applications" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Applications_Teachers" Association="Self.FK_Applications_Teachers">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Applications" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassStudents_Classes" Association="Self.FK_ClassStudents_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="Class_Students" EntitySet="Class_Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassStudents_SemesterStudents" Association="Self.FK_ClassStudents_SemesterStudents">
+      <End Role="Semester_Students" EntitySet="Semester_Students" />
+      <End Role="Class_Students" EntitySet="Class_Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassStudents_Subjects" Association="Self.FK_ClassStudents_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Class_Students" EntitySet="Class_Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grades_ClassStudent" Association="Self.FK_Grades_ClassStudent">
+      <End Role="Class_Students" EntitySet="Class_Students" />
+      <End Role="Grades" EntitySet="Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FParents_Contacts" Association="Self.FK_FParents_Contacts">
+      <End Role="Contacts" EntitySet="Contacts" />
+      <End Role="Parents" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MParents_Contacts" Association="Self.FK_MParents_Contacts">
+      <End Role="Contacts" EntitySet="Contacts" />
+      <End Role="Parents" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Schools_Contacts" Association="Self.FK_Schools_Contacts">
+      <End Role="Contacts" EntitySet="Contacts" />
+      <End Role="Schools" EntitySet="Schools" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInformations_Contact" Association="Self.FK_UserInformations_Contact">
+      <End Role="Contacts" EntitySet="Contacts" />
+      <End Role="UserInformations" EntitySet="UserInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Curiculums_Majors" Association="Self.FK_Curiculums_Majors">
+      <End Role="Majors" EntitySet="Majors" />
+      <End Role="Curiculums" EntitySet="Curiculums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Curiculums_Subjects" Association="Self.FK_Curiculums_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Curiculums" EntitySet="Curiculums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Departments_Schools" Association="Self.FK_Departments_Schools">
+      <End Role="Schools" EntitySet="Schools" />
+      <End Role="Departments" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staffs_Departments" Association="Self.FK_Staffs_Departments">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Staffs" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teachers_Departments" Association="Self.FK_Teachers_Departments">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Teachers" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_Files" Association="Self.FK_News_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GradeCategorys_Subjects" Association="Self.FK_GradeCategorys_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="GradeCategorys" EntitySet="GradeCategorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GradeItems_GradeCategorys" Association="Self.FK_GradeItems_GradeCategorys">
+      <End Role="GradeCategorys" EntitySet="GradeCategorys" />
+      <End Role="GradeItems" EntitySet="GradeItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grades_GradeItems" Association="Self.FK_Grades_GradeItems">
+      <End Role="GradeItems" EntitySet="GradeItems" />
+      <End Role="Grades" EntitySet="Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInformations_Images" Association="Self.FK_UserInformations_Images">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="UserInformations" EntitySet="UserInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Majors_Schools" Association="Self.FK_Majors_Schools">
+      <End Role="Schools" EntitySet="Schools" />
+      <End Role="Majors" EntitySet="Majors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Majors" Association="Self.FK_Students_Majors">
+      <End Role="Majors" EntitySet="Majors" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_Schools" Association="Self.FK_News_Schools">
+      <End Role="Schools" EntitySet="Schools" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_Staffs" Association="Self.FK_News_Staffs">
+      <End Role="Staffs" EntitySet="Staffs" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Parents" Association="Self.FK_Students_Parents">
+      <End Role="Parents" EntitySet="Parents" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RP_Permission" Association="Self.FK_RP_Permission">
+      <End Role="Permission" EntitySet="Permissions" />
+      <End Role="Role_Permission" EntitySet="Role_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RP_Roles" Association="Self.FK_RP_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Role_Permission" EntitySet="Role_Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Role" Association="Self.FK_Users_Role">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterStudents_Semester" Association="Self.FK_SemesterStudents_Semester">
+      <End Role="Semesters" EntitySet="Semesters" />
+      <End Role="Semester_Students" EntitySet="Semester_Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterStudents_Students" Association="Self.FK_SemesterStudents_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Semester_Students" EntitySet="Semester_Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staffs_Users" Association="Self.FK_Staffs_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Staffs" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Users" Association="Self.FK_Students_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teachers_Users" Association="Self.FK_Teachers_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Teachers" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInformations_Users" Association="Self.FK_UserInformations_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserInformations" EntitySet="UserInformations" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FPT_EducationSystemModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FPT_EducationSystemModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="stp_GetRequest" ReturnType="Collection(FPT_EducationSystemModel.stp_GetRequest_Result)">
+      <Parameter Name="Department" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_GetRequestCount" ReturnType="Collection(FPT_EducationSystemModel.stp_GetRequestCount_Result)" />
+    <FunctionImport Name="stp_GetRequestCountToday" ReturnType="Collection(FPT_EducationSystemModel.stp_GetRequestCountToday_Result)" />
+    <FunctionImport Name="stp_GetRequestDetail" ReturnType="Collection(FPT_EducationSystemModel.stp_GetRequestDetail_Result)">
+      <Parameter Name="RequestId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_InsertAdmin">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="MidleName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="Boolean" />
+      <Parameter Name="DOB" Mode="In" Type="String" />
+      <Parameter Name="AvatarName" Mode="In" Type="String" />
+      <Parameter Name="AvatarByte" Mode="In" Type="Binary" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_InsertApplication">
+      <Parameter Name="Department" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="StudentId" Mode="In" Type="Int32" />
+      <Parameter Name="Content" Mode="In" Type="String" />
+      <Parameter Name="FileName" Mode="In" Type="String" />
+      <Parameter Name="FileBytes" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="stp_InsertStaff">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="MidleName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="Boolean" />
+      <Parameter Name="DOB" Mode="In" Type="String" />
+      <Parameter Name="AvatarName" Mode="In" Type="String" />
+      <Parameter Name="AvatarByte" Mode="In" Type="Binary" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Department" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_InsertStudent">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="MidleName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="Boolean" />
+      <Parameter Name="DOB" Mode="In" Type="String" />
+      <Parameter Name="AvatarName" Mode="In" Type="String" />
+      <Parameter Name="AvatarByte" Mode="In" Type="Binary" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Major" Mode="In" Type="Int32" />
+      <Parameter Name="Father" Mode="In" Type="String" />
+      <Parameter Name="FPhone" Mode="In" Type="String" />
+      <Parameter Name="FEmail" Mode="In" Type="String" />
+      <Parameter Name="FAddress" Mode="In" Type="String" />
+      <Parameter Name="Mother" Mode="In" Type="String" />
+      <Parameter Name="MPhone" Mode="In" Type="String" />
+      <Parameter Name="MEmail" Mode="In" Type="String" />
+      <Parameter Name="MAddress" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_InsertTeacher">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="MidleName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="Boolean" />
+      <Parameter Name="DOB" Mode="In" Type="String" />
+      <Parameter Name="AvatarName" Mode="In" Type="String" />
+      <Parameter Name="AvatarByte" Mode="In" Type="Binary" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Department" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_SelectApplication" ReturnType="Collection(FPT_EducationSystemModel.stp_SelectApplication_Result)">
+      <Parameter Name="Title" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_SelectApplicationWithDepartment" ReturnType="Collection(FPT_EducationSystemModel.stp_SelectApplicationWithDepartment_Result)">
+      <Parameter Name="Department" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_UpdateApplication">
+      <Parameter Name="AppId" Mode="In" Type="Int32" />
+      <Parameter Name="AppStatus" Mode="In" Type="Boolean" />
+      <Parameter Name="Solved" Mode="In" Type="Int32" />
+      <Parameter Name="Solution" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_UpdateApplicationByMe">
+      <Parameter Name="AppId" Mode="In" Type="Int32" />
+      <Parameter Name="AppStatus" Mode="In" Type="Boolean" />
+      <Parameter Name="Solved" Mode="In" Type="Int32" />
+      <Parameter Name="Solution" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_GetRequest_Result">
+    <Property Type="Int32" Name="AppId" Nullable="false" />
+    <Property Type="Int32" Name="Department" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="500" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+    <Property Type="DateTime" Name="DateClose" Nullable="true" />
+    <Property Type="Boolean" Name="AppStatus" Nullable="true" />
+    <Property Type="Int32" Name="Solved" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_GetRequestCount_Result">
+    <Property Type="String" Name="DepartmentName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Requests" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_GetRequestCountToday_Result">
+    <Property Type="String" Name="DepartmentName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Requests" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_GetRequestDetail_Result">
+    <Property Type="Int32" Name="AppId" Nullable="false" />
+    <Property Type="Int32" Name="Department" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="500" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+    <Property Type="DateTime" Name="DateClose" Nullable="true" />
+    <Property Type="Boolean" Name="AppStatus" Nullable="true" />
+    <Property Type="Int32" Name="Solved" Nullable="true" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="Student" Nullable="false" />
+    <Property Type="String" Name="Content" Nullable="false" />
+    <Property Type="Int32" Name="FileAttached" Nullable="true" />
+    <Property Type="String" Name="Solution" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_SelectApplication_Result">
+    <Property Type="Int32" Name="AppId" Nullable="false" />
+    <Property Type="Int32" Name="Department" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="500" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+    <Property Type="DateTime" Name="DateClose" Nullable="true" />
+    <Property Type="Boolean" Name="AppStatus" Nullable="true" />
+    <Property Type="Int32" Name="Solved" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="stp_SelectApplicationWithDepartment_Result">
+    <Property Type="Int32" Name="AppId" Nullable="false" />
+    <Property Type="Int32" Name="Department" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="500" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+    <Property Type="DateTime" Name="DateClose" Nullable="true" />
+    <Property Type="Boolean" Name="AppStatus" Nullable="true" />
+    <Property Type="Int32" Name="Solved" Nullable="true" />
+  </ComplexType>
+</Schema>

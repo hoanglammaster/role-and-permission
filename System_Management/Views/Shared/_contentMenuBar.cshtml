@@ -1,0 +1,17 @@
+﻿@*Start Nav Bar*@
+<div class="container">
+    <div class="narbar narbar__container">
+        <div class="row">
+            <div style="float:left">
+                @Html.ActionLink("Home", "Index", "Home") | <span style="font-weight:600">@ViewBag.Message</span>
+            </div>
+            <div style="float:right">
+                @Html.ActionLink(@HttpContext.Current.Session["account"].ToString(), "Detail", "Home") |
+                @Html.ActionLink("Logout", "Logout", "Home") |
+                <span> CAMPUS : @HttpContext.Current.Session["campus"].ToString() </span>
+            </div>
+        </div>
+        <div class="row" style="clear:both"></div>
+    </div>
+</div>
+@*End Nav Bar*@

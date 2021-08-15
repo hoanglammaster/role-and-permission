@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="065d34143d994bc398db8522544ba8cf" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="SystemManagementModel.Admin" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.ApplicationDetail" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Application" Width="1.5" PointX="8.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Class" Width="1.5" PointX="11.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.ClassOfStudent" Width="1.5" PointX="13.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Contact" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Curiculum" Width="1.5" PointX="16.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Department" Width="1.5" PointX="6" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.File" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.GradeHasCategory" Width="1.5" PointX="11.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.GradeHasItem" Width="1.5" PointX="13.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Grade" Width="1.5" PointX="15.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Image" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Major" Width="1.5" PointX="3.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.News" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Parent" Width="1.5" PointX="3.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Permission" Width="1.5" PointX="3.75" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Role" Width="1.5" PointX="0.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.RoleToPermission" Width="1.5" PointX="6" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.School" Width="1.5" PointX="1.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.SemesterOfStudent" Width="1.5" PointX="11.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Semester" Width="1.5" PointX="9" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Staff" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Student" Width="1.5" PointX="6" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Subject" Width="1.5" PointX="11.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.Teacher" Width="1.5" PointX="6" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.UserInformation" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.User" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemManagementModel.UserToRole" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <AssociationConnector Association="SystemManagementModel.FK_Admins_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_ApplicationDetails_Applications" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_ApplicationDetails_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_ApplicationDetails_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Applications_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Applications_Teachers" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_ClassStudents_Classes" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_ClassStudents_SemesterStudents" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_ClassStudents_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Grades_ClassStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_FParents_Contacts" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_MParents_Contacts" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Schools_Contacts" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_UserInformations_Contact" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Curiculums_Majors" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Curiculums_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Departments_Schools" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Staffs_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Teachers_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_News_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_GradeHasCategorys_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_GradeItems_GradeCategorys" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Grades_GradeHasItems" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_UserInformations_Images" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Majors_Schools" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Students_Majors" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_News_Schools" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_News_Staffs" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Students_Parents" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_RoleToPermissions_Permission" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_RoleToPermissions_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_UserToRoles_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_SemesterStudents_Semester" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_SemesterStudents_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Staffs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Students_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_Teachers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_UserInformations_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemManagementModel.FK_UserToRoles_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SystemManagementModel.SchoolHasUser" Width="1.5" PointX="6.75" PointY="3" />
+        <AssociationConnector Association="SystemManagementModel.FK_SchoolToStudents_Schools1" />
+        <AssociationConnector Association="SystemManagementModel.FK_SchoolToStudents_Users" />
+        <EntityTypeShape EntityType="SystemManagementModel.ApplicationType" Width="1.5" PointX="3.375" PointY="0.875" />
+        <AssociationConnector Association="SystemManagementModel.FK_Application_ApplicationType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
